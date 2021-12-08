@@ -1,0 +1,39 @@
+{% include 'header.html' %}
+<br />
+<a href="{{url_for('create')}}" class="btn btn-success">
+    Nuevo alumno
+</a>
+<br>
+<br>
+    <table class="table table-dark table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Numero de control</th>
+                <th>Foto</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Carrera</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for estudiante in estudiantes %}
+            <tr>
+                <td>{{estudiante[4]}}</td>
+                <td>
+                    <img class="img-thumbnail" width="100" src="uploads/{{estudiante[6]}}">
+                </td>
+                <td>{{estudiante[1]}}</td>
+                <td>{{estudiante[2]}}</td>
+                <td>{{estudiante[3]}}</td>
+                <td>{{estudiante[5]}}</td>
+                <td> <a  onclick="return confirm('¿Desea editar el registro del alumno?')" class="btn btn-warning" href="/edit/{{estudiante[0]}}">Editar</a>     
+                    <a  onclick="return confirm('¿Desea borrar el registro del alumno?')" class="btn btn-danger" href="/destroy/{{estudiante[0]}}">Eliminar</a>
+                    <a  onclick="return confirm('¿Desea descargar el registro del alumno?')" class="btn btn-primary" href="/datos/{{estudiante[0]}}" download="/datos/{{estudiante[0]}}.xml">Descargar xml</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% include 'footer.html' %}

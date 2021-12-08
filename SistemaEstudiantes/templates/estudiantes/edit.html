@@ -1,0 +1,61 @@
+{% include 'header.html' %}
+
+<!--Recibir todos los mensajes que tenga flask a traves de flash-->
+<br>
+{% with messages= get_flashed_messages() %}
+<!--Si hay mensajes se desgosan de uno en uno-->
+{% if messages %}
+<div class="alert alert-danger" role="alert">
+    {% for message in messages %}
+    {{message}}
+    {% endfor %}
+</div>
+{% endif%}
+{% endwith %}
+<br>
+{% for estudiante in estudiantes%}
+<form method="post" action="/update" enctype="multipart/form-data">
+    <div class="card">
+        <div class="card-header">
+            Editar estudiante
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Datos del estudiante</h5>
+            <p class="card-text">
+                <div class="form-group">
+                    <label for="txtNombre">Nombre:</label>
+                    <input id="txtNombre" class="form-control" value="{{estudiante[1]}}" type="text" name="txtNombre">
+                </div>
+                <div class="form-group">
+                    <label for="txtApellido">Apellido:</label>
+                    <input id="txtApellido" class="form-control" value="{{estudiante[2]}}" type="text" name="txtApellido">
+                </div>
+                <div class="form-group">
+                    <label for="txtCorreo">Correo electrónico:</label>
+                    <input id="txtCorreo" class="form-control" value="{{estudiante[3]}}" type="text" name="txtCorreo">
+                </div>
+                <div class="form-group">
+                    <label for="txtNControl">Número de control:</label>                                  
+                    <input id="txtNControl" class="form-control" value="{{estudiante[4]}}" type="text" name="txtNControl">
+                </div>
+                <div class="form-group">
+                    <label for="txtCarrera">Carrera:</label>                                  
+                    <input id="txtCarrera" class="form-control" value="{{estudiante[5]}}" type="text" name="txtCarrera">
+                </div>
+                <div class="form-group">
+                    <label for="txtFoto">Foto:</label>
+                    <br>
+                    <img class="img-thumbnail" src="{{ url_for('uploads', nombreFoto =estudiante[6]) }}" alt=""><br>
+                    <input id="txtFoto" Fotos="form-control" type="file" name="txtFoto">
+                </div>
+                <input type="hidden" value="{{estudiante[0]}}" name="txtID" id="txtID">
+                <div class="form-group">
+                    <input class="btn btn-success" onclick="return confirm('¿Desea guardar los cambios?')" type="submit" value="Guardar cambios">
+                    <a href="{{url_for('index')}}" class="btn btn-primary">Regresar</a>
+                </div>
+            </p>
+        </div>
+    </div>
+</form>
+{% endfor %}
+{% include 'footer.html' %}

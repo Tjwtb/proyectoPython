@@ -1,0 +1,12 @@
+{% for estudiante in estudiantes%}
+<? xml version="1.0" enconding="UTF-8?>
+<estudiante>
+<nombre>{{estudiante[1]}}</nombre>
+<apellido>{{estudiante[2]}}</apellido>
+<correo>{{estudiante[3]}}</correo>
+<ncontrol>{{estudiante[4]}}</ncontrol>
+<carrera>{{estudiante[5]}}</carrera>
+</estudiante> 
+
+
+{% endfor %}
